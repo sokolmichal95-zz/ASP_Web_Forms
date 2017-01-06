@@ -190,6 +190,9 @@
     <Content Include="Account\TwoFactorAuthenticationSignIn.aspx" />
     <Content Include="Account\VerifyPhoneNumber.aspx" />
     <Content Include="App_Data\ASP.NetWebForms.mdf" />
+    <Content Include="App_Data\ASP.NetWebForms_log.ldf">
+      <DependentUpon>ASP.NetWebForms.mdf</DependentUpon>
+    </Content>
     <Content Include="Catalog\Images\boatbig.png" />
     <Content Include="Catalog\Images\boatpaper.png" />
     <Content Include="Catalog\Images\boatsail.png" />
