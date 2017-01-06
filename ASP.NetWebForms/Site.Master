@@ -87,12 +87,15 @@
                 SelectMethod="GetCategories">
                 <ItemTemplate>
                     <b style="font-size: large; font-style: normal">
-                        <a href="~/ProductList.aspx?id=<%#: Item.CategoryID %>">
+                        <a href="/ProductList.aspx?id=<%#: Item.CategoryID %>">
                             <%#: Item.CategoryName %>
                         </a>
                     </b>
                 </ItemTemplate>
                 <ItemSeparatorTemplate> | </ItemSeparatorTemplate>
+                <EmptyDataTemplate>
+                    <p>Empty text that will be displayed.</p>
+                </EmptyDataTemplate>
             </asp:ListView>
         </div>
         <div class="container body-content">
