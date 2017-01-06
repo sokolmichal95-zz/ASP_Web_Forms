@@ -10,6 +10,7 @@ namespace ASP.NetWebForms.Models
     {
         public ProductContext() : base("ASP.NetWebForms")
         {
+            Database.SetInitializer(new ProductDatabaseInitializer());
         }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
