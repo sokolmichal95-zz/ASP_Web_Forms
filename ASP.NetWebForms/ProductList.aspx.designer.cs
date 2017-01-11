@@ -13,7 +13,7 @@ namespace ASP.NetWebForms {
     public partial class ProductList {
         
         /// <summary>
-        /// ProductList control.
+        /// productList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
