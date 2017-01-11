@@ -19,7 +19,7 @@
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Remove Item">
                 <ItemTemplate>
-                    <asp:CheckBox ID="Remove" runat="server" />
+                    <asp:CheckBox id="Remove" runat="server" />
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>
