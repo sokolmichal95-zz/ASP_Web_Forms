@@ -9,7 +9,7 @@ using ASP.NetWebForms.Logic;
 
 namespace ASP.NetWebForms
 {
-    public partial class AddToCart : System.Web.UI.Page
+    public partial class AddToCart : Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

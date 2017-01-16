@@ -14,7 +14,7 @@ namespace ASP.NetWebForms.Models
         [Required, StringLength(100), Display(Name = "Name")]
         public string CategoryName { get; set; }
 
-        [Required, StringLength(10000), Display(Name = "Category Description")]
+        [StringLength(10000), Display(Name = "Category Description")]
         public string CategoryDescription { get; set; }
 
         public virtual ICollection<Product> Products { get; set; }

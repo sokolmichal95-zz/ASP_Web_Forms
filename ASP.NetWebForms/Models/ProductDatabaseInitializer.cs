@@ -3,7 +3,7 @@ using System.Data.Entity;
 
 namespace ASP.NetWebForms.Models
 {
-    public class ProductDatabaseInitializer : DropCreateDatabaseIfModelChanges<ProductContext>
+    public class ProductDatabaseInitializer : DropCreateDatabaseAlways<ProductContext>
     {
         protected override void Seed(ProductContext context)
         {
@@ -50,8 +50,7 @@ namespace ASP.NetWebForms.Models
                 {
                     ProductID = 1,
                     ProductName = "Convertible Car",
-                    Description = "This convertible car is fast! The engine is powered by a neutrino based battery (not included)." +
-                                  "Power it up and let it go!",
+                    Description = "This convertible car is fast! The engine is powered by a neutrino based battery (not included). Power it up and let it go!",
                     ImagePath="carconvert.png",
                     UnitPrice = 22.50,
                     CategoryID = 1
@@ -87,8 +86,7 @@ namespace ASP.NetWebForms.Models
                 {
                     ProductID = 5,
                     ProductName = "Old Style Racer",
-                    Description = "This old style racer can fly (with user assistance). Gravity controls flight duration." +
-                                  "No batteries required.",
+                    Description = "This old style racer can fly (with user assistance). Gravity controls flight duration. No batteries required.",
                     ImagePath="carracer.png",
                     UnitPrice = 34.95,
                     CategoryID = 1
@@ -160,8 +158,7 @@ namespace ASP.NetWebForms.Models
                 {
                     ProductID = 13,
                     ProductName = "Big Ship",
-                    Description = "Is it a boat or a ship. Let this floating vehicle decide by using its " +
-                                  "artifically intelligent computer brain!",
+                    Description = "Is it a boat or a ship. Let this floating vehicle decide by using its artifically intelligent computer brain!",
                     ImagePath="boatbig.png",
                     UnitPrice = 95.00,
                     CategoryID = 4
@@ -170,8 +167,7 @@ namespace ASP.NetWebForms.Models
                 {
                     ProductID = 14,
                     ProductName = "Paper Boat",
-                    Description = "Floating fun for all! This toy boat can be assembled in seconds. Floats for minutes!" +
-                                  "Some folding required.",
+                    Description = "Floating fun for all! This toy boat can be assembled in seconds. Floats for minutes! Some folding required.",
                     ImagePath="boatpaper.png",
                     UnitPrice = 4.95,
                     CategoryID = 4

@@ -190,10 +190,6 @@
     <Content Include="Account\TwoFactorAuthenticationSignIn.aspx" />
     <Content Include="Account\VerifyPhoneNumber.aspx" />
     <Content Include="AddToCart.aspx" />
-    <Content Include="App_Data\ASP.NetWebForms.mdf" />
-    <Content Include="App_Data\ASP.NetWebForms_log.ldf">
-      <DependentUpon>ASP.NetWebForms.mdf</DependentUpon>
-    </Content>
     <Content Include="Catalog\Images\boatbig.png" />
     <Content Include="Catalog\Images\boatpaper.png" />
     <Content Include="Catalog\Images\boatsail.png" />
@@ -485,7 +481,9 @@
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />

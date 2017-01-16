@@ -6,22 +6,18 @@ using ASP.NetWebForms.Models;
 
 namespace ASP.NetWebForms.Logic
 {
-    public class ShoppingCartActions: IDisposable
+    public class ShoppingCartActions : IDisposable
     {
         public string ShoppingCartId { get; set; }
-
         private ProductContext _db = new ProductContext();
-
         public const string CartSessionKey = "CartId";
-
         public void AddToCart(int id)
         {
             ShoppingCartId = GetCartId();
-
-            var cartItem = _db.ShoppingCartItems.SingleOrDefault(
-                c => c.CartId == ShoppingCartId && c.ProductId == id
-                );
-            if(cartItem == null)
+            var cartItem = _db.CartItems.SingleOrDefault(
+                c => c.CartId == ShoppingCartId
+                && c.ProductId == id);
+            if (cartItem == null)
             {
                 cartItem = new CartItem
                 {
@@ -34,17 +30,18 @@ namespace ASP.NetWebForms.Logic
                     DateCreated = DateTime.Now
                 };
 
-                _db.ShoppingCartItems.Add(cartItem);
+                _db.CartItems.Add(cartItem);
             }
             else
             {
                 cartItem.Quantity++;
             }
+            _db.SaveChanges();
         }
 
         public void Dispose()
         {
-            if(_db != null)
+            if (_db != null)
             {
                 _db.Dispose();
                 _db = null;
@@ -71,7 +68,8 @@ namespace ASP.NetWebForms.Logic
         public List<CartItem> GetCartItems()
         {
             ShoppingCartId = GetCartId();
-            return _db.ShoppingCartItems.Where(c => c.CartId == ShoppingCartId).ToList();
+
+            return _db.CartItems.Where(c => c.CartId == ShoppingCartId).ToList();
         }
     }
 }
