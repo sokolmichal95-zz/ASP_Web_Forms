@@ -9,6 +9,7 @@ using System.Web.UI.WebControls;
 using Microsoft.AspNet.Identity;
 using System.Linq;
 using ASP.NetWebForms.Models;
+using ASP.NetWebForms.Logic;
 
 namespace ASP.NetWebForms
 {
@@ -72,6 +73,15 @@ namespace ASP.NetWebForms
         protected void Page_Load(object sender, EventArgs e)
         {
 
+        }
+
+        protected void Page_PreRender(object sender, EventArgs e)
+        {
+            using(ShoppingCartActions sca = new ShoppingCartActions())
+            {
+                string cartStr = string.Format("Cart ({0})", sca.GetCount());
+                cartCount.InnerText = cartStr;
+            }
         }
 
         public IQueryable<Category> GetCategories()

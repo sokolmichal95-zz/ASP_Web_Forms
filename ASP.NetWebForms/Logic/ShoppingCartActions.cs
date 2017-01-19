@@ -71,5 +71,124 @@ namespace ASP.NetWebForms.Logic
 
             return _db.CartItems.Where(c => c.CartId == ShoppingCartId).ToList();
         }
+
+        public decimal GetTotal()
+        {
+            ShoppingCartId = GetCartId();
+            decimal? total = decimal.Zero;
+            total = (decimal?)(from cartItems in _db.CartItems
+                               where cartItems.CartId == ShoppingCartId
+                               select (int?)cartItems.Quantity * cartItems.Product.UnitPrice).Sum();
+            return total ?? decimal.Zero;
+        }
+
+        public ShoppingCartActions GetCart(HttpContext context)
+        {
+            using (var cart = new ShoppingCartActions())
+            {
+                cart.ShoppingCartId = GetCartId();
+                return cart;
+            }
+        }
+
+        public void UpdateShoppingCartDatabase(String cartId, ShoppingCartUpdates[] CartItemUpdates)
+        {
+            using(var db = new ASP.NetWebForms.Models.ProductContext())
+            {
+                try
+                {
+                    int CartItemCount = CartItemUpdates.Count();
+                    List<CartItem> ciList = GetCartItems();
+                    foreach (var item in ciList)
+                    {
+                        for(int i = 0; i < CartItemCount; i++)
+                        {
+                            if (item.Product.ProductID == CartItemUpdates[i].ProductId)
+                            {
+                                if(CartItemUpdates[i].Quantity < 1 || CartItemUpdates[i].RemoveItem == true)
+                                {
+                                    RemoveItem(cartId, item.ProductId);
+                                }
+                                else
+                                {
+                                    UpdateItem(cartId, item.ProductId, CartItemUpdates[i].Quantity);
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("ERROR CartDB was fucked!" + e.Message.ToString(), e);
+                }
+            }
+        }
+
+        public void RemoveItem(String id, int productId)
+        {
+            using (var _db = new ProductContext())
+            {
+                try
+                {
+                    var item = (from c in _db.CartItems where c.CartId == id && c.Product.ProductID == productId select c).FirstOrDefault();
+                    if (item != null)
+                    {
+                        _db.CartItems.Remove(item);
+                        _db.SaveChanges();
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Unable to remove: " + e.Message.ToString(), e);
+                }
+            }
+        }
+
+        public void UpdateItem(String id, int productId, int quantity)
+        {
+            using(var _db = new ProductContext())
+            {
+                try
+                {
+                    var item = (from c in _db.CartItems where c.CartId == id && c.Product.ProductID == productId select c).FirstOrDefault();
+                    if (item != null)
+                    {
+                        item.Quantity = quantity;
+                        _db.SaveChanges();
+                    }
+                }
+                catch (Exception e)
+                { 
+                    throw new Exception("ERROR Updating: " + e.Message.ToString(), e);
+                }
+            }
+        }
+
+        public void EmptyCart()
+        {
+            ShoppingCartId = GetCartId();
+            var items = _db.CartItems.Where(c => c.CartId == ShoppingCartId);
+            foreach (var item in items)
+            {
+                _db.CartItems.Remove(item);
+            }
+            _db.SaveChanges();
+        }
+
+        public int GetCount()
+        {
+            ShoppingCartId = GetCartId();
+            int? count = (from ci in _db.CartItems
+                          where ci.CartId == ShoppingCartId
+                          select (int?)ci.Quantity).Sum();
+            return count ?? 0;
+        }
+
+        public struct ShoppingCartUpdates
+        {
+            public int ProductId;
+            public int Quantity;
+            public bool RemoveItem;
+        }
     }
 }
