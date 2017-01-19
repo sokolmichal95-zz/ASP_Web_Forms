@@ -8,6 +8,7 @@ using System.Web.Security;
 using System.Web.SessionState;
 using System.Data.Entity;
 using ASP.NetWebForms.Models;
+using ASP.NetWebForms.Logic;
 
 namespace ASP.NetWebForms
 {
@@ -21,6 +22,9 @@ namespace ASP.NetWebForms
 
             // Initialize the product database
             Database.SetInitializer(new ProductDatabaseInitializer());
+
+            RoleActions ra = new RoleActions();
+            ra.AddUserAndRole();
         }
     }
 }
