@@ -23,24 +23,20 @@ namespace ASP.NetWebForms.Logic
 
             if (!roleManager.RoleExists("canEdit"))
             {
-                IdRoleResult = roleManager.Create(new IdentityRole{ Name = "canEdit"});
+                IdRoleResult = roleManager.Create(new IdentityRole("canEdit"));
             }
 
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
             var appUser = new ApplicationUser
             {
                 UserName = "user",
-                Email = "user@asp.netwebforms.com"
+                Email = "user@aspnetwebforms.com"
             };
             IdUserResult = userManager.Create(appUser, "Pa$$word123");
 
-            if(!userManager.IsInRole(userManager.FindByEmail("user@asp.netwebforms.com").Id, "canEdit"))
+            if(!userManager.IsInRole(userManager.FindByEmail("user@aspnetwebforms.com").Id, "canEdit"))
             {
-                IdUserResult = userManager.AddToRole(userManager.FindByEmail("user@asp.netwebforms.com").Id, "canEdit");
-            }
-            else
-            {
-                IdUserResult = userManager.Create(appUser, "Pa$$word123");
+                IdUserResult = userManager.AddToRole(userManager.FindByEmail("user@aspnetwebforms.com").Id, "canEdit");
             }
         }
     }

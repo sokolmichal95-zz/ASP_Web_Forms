@@ -3,7 +3,7 @@ using System.Data.Entity;
 
 namespace ASP.NetWebForms.Models
 {
-    public class ProductDatabaseInitializer : DropCreateDatabaseAlways<ProductContext>
+    public class ProductDatabaseInitializer : DropCreateDatabaseIfModelChanges<ProductContext>
     {
         protected override void Seed(ProductContext context)
         {
