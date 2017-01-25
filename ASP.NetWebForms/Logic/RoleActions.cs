@@ -29,7 +29,7 @@ namespace ASP.NetWebForms.Logic
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
             var appUser = new ApplicationUser
             {
-                UserName = "user",
+                UserName = "user@asp.netwebforms.com",
                 Email = "user@aspnetwebforms.com"
             };
             IdUserResult = userManager.Create(appUser, "Pa$$word123");
